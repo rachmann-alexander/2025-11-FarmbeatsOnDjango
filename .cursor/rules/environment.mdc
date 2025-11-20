@@ -1,8 +1,0 @@
----
-description: Virtual environment
-alwaysApply: true
-globs:
-  - "**/*"
----
-
-- If you are using Python, use an environment called myenv. activate the environment, if not already activated.
