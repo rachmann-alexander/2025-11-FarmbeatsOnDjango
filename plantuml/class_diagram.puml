@@ -1,0 +1,72 @@
+@startuml
+allowmixing
+title Farmbeats Sensor Platform - Class & Component Overview
+
+package "Hardware" {
+  class BaseSensor {
+    +name: str
+    +read(): tuple
+    +rolling_average()
+  }
+
+  class AirTemperatureHumiditySensor {
+    +read(): (Decimal humidity, Decimal temperature)
+    +setup()
+  }
+
+  BaseSensor <|-- AirTemperatureHumiditySensor
+}
+
+package "Domain Models" {
+  class SensorDevice {
+    +name: CharField
+    +slug: SlugField
+    +sensor_type: TextChoices
+    +location: CharField
+    +readings(): QuerySet
+  }
+
+  class SensorReading {
+    +humidity: DecimalField
+    +temperature: DecimalField
+    +recorded_at: DateTimeField
+  }
+
+  SensorDevice "1" o-- "*" SensorReading : readings
+}
+
+package "Services" {
+  class SensorCollector {
+    +collect_air_sample(): SensorReading
+    +collect_air_samples(n, interval): list
+  }
+}
+
+package "Django MVC" {
+  class LatestReadingsView {
+    +get_queryset(): QuerySet
+  }
+
+  class CollectReadingsCommand {
+    +handle()
+  }
+}
+
+AirTemperatureHumiditySensor --> SensorCollector : provides readings
+SensorCollector --> SensorReading : creates
+SensorCollector --> SensorDevice : get_or_create
+LatestReadingsView --> SensorReading : queries
+CollectReadingsCommand --> SensorCollector : orchestrates
+
+component "SQLite DB" as SQLite
+SensorReading --> SQLite
+SensorDevice --> SQLite
+
+interface SensorInterface {
+  +read(): tuple
+}
+
+SensorInterface <|.. BaseSensor
+
+@enduml
+

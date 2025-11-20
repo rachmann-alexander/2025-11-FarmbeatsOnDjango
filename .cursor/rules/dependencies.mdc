@@ -1,0 +1,8 @@
+---
+description: requirments.txt
+alwaysApply: true
+globs:
+  - "**/*"
+---
+
+- If you are using Python, use a requirements.txt to document all dependencies.

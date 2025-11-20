@@ -1,0 +1,7 @@
+[2025-11-20 12:22:09,714] INFO sensor_logger: runtime_log.log truncated for new run
+[2025-11-20 12:22:09,714] WARNING sensor_logger: AirTemperatureHumiditySensor.setup: seeed_dht not available, falling back to simulated readings
+[2025-11-20 12:22:09,714] INFO sensor_logger: Starting collection run: samples=1 interval=2.0s
+[2025-11-20 12:22:09,719] INFO sensor_logger: Stored air reading from Air Temperature & Humidity: humidity=59.16% temperature=24.61°C
+[2025-11-20 12:22:09,719] INFO sensor_logger: Completed collection run, stored 1 readings
+[2025-11-20 12:22:24,874] INFO sensor_logger: Sensors app ready
+[2025-11-20 12:22:25,664] INFO sensor_logger: Sensors app ready

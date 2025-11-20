@@ -1,0 +1,28 @@
+@startuml
+title Collect Sensor Reading - Main Use Case
+
+actor Operator
+participant "manage.py collect_readings" as Command
+participant "SensorCollector" as Collector
+participant "AirTemperatureHumiditySensor" as Hardware
+database "SQLite" as DB
+
+Operator -> Command: python manage.py collect_readings
+Command -> Command: truncate runtime_log.log
+Command -> Collector: collect_air_samples(samples, interval)
+loop per sample
+    Collector -> Hardware: read()
+    alt real hardware available
+        Hardware --> Collector: humidity, temperature
+    else fallback simulation
+        Hardware --> Collector: simulated humidity, temperature
+    end
+    Collector -> DB: INSERT SensorReading\n(get_or_create SensorDevice)
+    DB --> Collector: saved SensorReading
+    Collector --> Command: SensorReading DTO
+    Command -> Operator: display "[i/n] ... humidity=X temperature=Y"
+end
+Command -> Operator: success summary
+
+@enduml
+
