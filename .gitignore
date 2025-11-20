@@ -1,7 +1,6 @@
 .DS_Store
 **/.DS_Store
 
-lifelog_log.log
-runtime_log.log
+log/
 db.sqlite3
 

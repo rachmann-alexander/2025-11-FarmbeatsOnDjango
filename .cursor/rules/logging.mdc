@@ -6,4 +6,5 @@ alwaysApply: true
 ---
 
 - Log all important events with an an appropriate log level.
-- Use two log files: First log file (lifelog_log.log) to log all events. Do not delete this file or its contents. Second, use a file called runtime_log.log to log the events of the current run of the program. Before every run, delete the content of runtime_log.log
+- Use two log files: First log file (lifelog_log.log) to log all events. Do not delete this file or its contents. Second, use a file called runtime_log.log to log the events of the current run of the program. Before every run, delete the content of runtime_log.
+- store the files in a folder called log

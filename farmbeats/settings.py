@@ -14,8 +14,10 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-LIFELOG_PATH = BASE_DIR / "lifelog_log.log"
-RUNTIME_LOG_PATH = BASE_DIR / "runtime_log.log"
+LOG_DIR = BASE_DIR / "log"
+LOG_DIR.mkdir(exist_ok=True)
+LIFELOG_PATH = LOG_DIR / "lifelog_log.log"
+RUNTIME_LOG_PATH = LOG_DIR / "runtime_log.log"
 
 
 # Quick-start development settings - unsuitable for production

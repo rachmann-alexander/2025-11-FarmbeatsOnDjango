@@ -43,6 +43,7 @@ class Command(BaseCommand):
 
     def _reset_runtime_log(self) -> None:
         runtime_path = Path(settings.RUNTIME_LOG_PATH)
+        runtime_path.parent.mkdir(parents=True, exist_ok=True)
         runtime_path.write_text("")
         logging.getLogger("sensor_logger").info("runtime_log.log truncated for new run")
 
